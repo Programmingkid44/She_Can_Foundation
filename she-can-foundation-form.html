@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>She Can Foundation — Connect With Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose:    #c0414f;
+      --rose-lt: #e8a0a8;
+      --cream:   #fdf6ef;
+      --warm:    #f2e4d8;
+      --ink:     #1e1212;
+      --muted:   #7a5c5c;
+      --border:  rgba(192,65,79,.18);
+      --shadow:  0 24px 64px rgba(192,65,79,.12);
+      --radius:  18px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Background blobs ── */
+    .bg-blobs {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .35;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .blob-1 { width: 520px; height: 520px; background: var(--rose-lt); top: -120px; right: -100px; animation-duration: 20s; }
+    .blob-2 { width: 380px; height: 380px; background: #f8c8a8; bottom: -80px; left: -80px; animation-duration: 24s; animation-delay: -6s; }
+    .blob-3 { width: 260px; height: 260px; background: var(--rose); opacity: .12; top: 50%; left: 40%; animation-duration: 16s; animation-delay: -3s; }
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(30px, 40px) scale(1.08); }
+    }
+
+    /* ── Layout ── */
+    .page {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    /* ── Left panel ── */
+    .left-panel {
+      padding: 72px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    .logo-mark {
+      width: 52px; height: 52px;
+      border: 2.5px solid var(--rose);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 40px;
+      animation: fadeUp .8s ease both;
+    }
+    .logo-mark svg { width: 28px; height: 28px; }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 4vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -.01em;
+      color: var(--ink);
+      animation: fadeUp .8s .1s ease both;
+    }
+    .tagline em { color: var(--rose); font-style: italic; }
+
+    .sub {
+      margin-top: 24px;
+      font-size: .95rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 340px;
+      animation: fadeUp .8s .2s ease both;
+    }
+
+    .pills {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 40px;
+      animation: fadeUp .8s .3s ease both;
+    }
+    .pill {
+      padding: 7px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--rose);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.5);
+      backdrop-filter: blur(8px);
+    }
+
+    .divider-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--rose), transparent);
+      margin-top: 48px;
+      animation: fadeUp .8s .4s ease both;
+    }
+
+    /* ── Right panel (form card) ── */
+    .right-panel {
+      padding: 56px 56px 56px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .card {
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: var(--radius);
+      padding: 48px 44px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: var(--shadow);
+      animation: cardIn .9s .15s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(32px) scale(.97); }
+      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+
+    .card-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .card-header p {
+      margin-top: 6px;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    /* ── Auth tabs ── */
+    .auth-tabs {
+      display: flex;
+      gap: 4px;
+      margin-top: 28px;
+      background: var(--warm);
+      border-radius: 10px;
+      padding: 4px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 9px 0;
+      border: none;
+      border-radius: 7px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      color: var(--muted);
+      transition: all .25s ease;
+    }
+    .tab-btn.active {
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    /* ── Auth forms ── */
+    .auth-section { margin-top: 24px; }
+    .auth-form { display: none; flex-direction: column; gap: 14px; }
+    .auth-form.visible { display: flex; }
+
+    /* ── Field group ── */
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+    label {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    input, textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: rgba(255,255,255,.7);
+      color: var(--ink);
+      outline: none;
+      transition: border-color .25s, box-shadow .25s, background .25s;
+      width: 100%;
+    }
+    input::placeholder, textarea::placeholder { color: #bba8a8; }
+    input:focus, textarea:focus {
+      border-color: var(--rose);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(192,65,79,.08);
+    }
+    input.error, textarea.error {
+      border-color: #e04040;
+      box-shadow: 0 0 0 3px rgba(224,64,64,.1);
+    }
+    textarea { resize: vertical; min-height: 100px; }
+
+    .err-msg {
+      font-size: .73rem;
+      color: #d63030;
+      min-height: 16px;
+      display: none;
+    }
+    .err-msg.show { display: block; }
+
+    /* ── Auth-specific message ── */
+    .auth-note {
+      font-size: .78rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 4px;
+    }
+    .auth-note span {
+      color: var(--rose);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      padding: 13px 0;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--rose), #9b2a3a);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      width: 100%;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.15), transparent);
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,65,79,.35); }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* ── Contact section (post-auth) ── */
+    #contact-section { display: none; }
+    #contact-section.visible { display: block; }
+
+    .user-badge {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 24px;
+      padding: 10px 14px;
+      background: rgba(192,65,79,.06);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .avatar {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, var(--rose), #9b2a3a);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .user-info { flex: 1; }
+    .user-name { font-size: .85rem; font-weight: 500; color: var(--ink); }
+    .user-email-display { font-size: .73rem; color: var(--muted); }
+    .logout-btn {
+      font-size: .73rem;
+      color: var(--rose);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: underline;
+    }
+
+    /* ── Progress bar ── */
+    .progress-bar {
+      height: 3px;
+      background: var(--warm);
+      border-radius: 2px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--rose), var(--rose-lt));
+      border-radius: 2px;
+      width: 0%;
+      transition: width .4s ease;
+    }
+
+    /* ── Char counter ── */
+    .char-counter {
+      font-size: .72rem;
+      color: var(--muted);
+      text-align: right;
+      margin-top: -2px;
+    }
+
+    /* ── Success state ── */
+    #success-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 24px 0;
+      gap: 12px;
+    }
+    #success-state.visible { display: flex; }
+    .success-icon {
+      width: 68px; height: 68px;
+      background: linear-gradient(135deg, var(--rose), #9b2a3a);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      animation: popIn .5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    .success-icon svg { width: 32px; height: 32px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .success-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: var(--ink);
+      animation: fadeUp .5s .2s ease both;
+    }
+    .success-sub {
+      font-size: .85rem;
+      color: var(--muted);
+      max-width: 260px;
+      line-height: 1.6;
+      animation: fadeUp .5s .3s ease both;
+    }
+    .success-meta {
+      font-size: .75rem;
+      color: var(--rose-lt);
+      background: rgba(192,65,79,.06);
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      animation: fadeUp .5s .4s ease both;
+    }
+    .btn-reset {
+      margin-top: 8px;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+      animation: fadeUp .5s .5s ease both;
+    }
+    .btn-reset:hover { border-color: var(--rose); color: var(--rose); }
+
+    /* ── API status toast ── */
+    #api-toast {
+      position: fixed;
+      bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--ink);
+      color: #fff;
+      font-size: .8rem;
+      padding: 10px 20px;
+      border-radius: 100px;
+      z-index: 999;
+      transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .4s;
+      opacity: 0;
+      white-space: nowrap;
+    }
+    #api-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Spinner ── */
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .page { grid-template-columns: 1fr; }
+      .left-panel {
+        padding: 48px 32px 32px;
+        justify-content: flex-start;
+      }
+      .tagline { font-size: 2.2rem; }
+      .right-panel { padding: 16px 20px 48px; justify-content: center; }
+      .card { padding: 36px 28px; max-width: 100%; }
+      .logo-mark { margin-bottom: 28px; }
+    }
+    @media (max-width: 480px) {
+      .left-panel { padding: 36px 20px 24px; }
+      .right-panel { padding: 8px 16px 40px; }
+      .card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="page">
+
+  <!-- ── Left Panel ── -->
+  <div class="left-panel">
+    <div class="logo-mark">
+      <!-- Feminine rising figure icon -->
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="7" r="3.5" stroke="#c0414f" stroke-width="2"/>
+        <path d="M8 28c0-5 2.5-9 6-9s6 4 6 9" stroke="#c0414f" stroke-width="2" stroke-linecap="round"/>
+        <path d="M14 18v-5M10 16l4-3 4 3" stroke="#c0414f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 22l-4-3M18 22l4-3" stroke="#c0414f" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+      </svg>
+    </div>
+
+    <h1 class="tagline">
+      Empowering <em>Her</em><br>
+      Story, One<br>
+      Voice at a Time.
+    </h1>
+
+    <p class="sub">
+      She Can Foundation supports women through education, mentorship, and community. Reach out — your message matters.
+    </p>
+
+    <div class="pills">
+      <span class="pill">Education</span>
+      <span class="pill">Mentorship</span>
+      <span class="pill">Community</span>
+      <span class="pill">Empowerment</span>
+    </div>
+
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- ── Right Panel ── -->
+  <div class="right-panel">
+    <div class="card">
+
+      <!-- Header -->
+      <div class="card-header">
+        <h2>Connect With Us</h2>
+        <p>Sign in or create an account to send your message.</p>
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="auth-tabs" id="auth-tabs">
+        <button class="tab-btn active" onclick="switchTab('login')">Sign In</button>
+        <button class="tab-btn" onclick="switchTab('register')">Register</button>
+      </div>
+
+      <!-- Auth Section -->
+      <div class="auth-section" id="auth-section">
+
+        <!-- Login Form -->
+        <form class="auth-form visible" id="login-form" novalidate>
+          <div class="field">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email"/>
+            <span class="err-msg" id="login-email-err">Please enter a valid email address.</span>
+          </div>
+          <div class="field">
+            <label for="login-pass">Password</label>
+            <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"/>
+            <span class="err-msg" id="login-pass-err">Password must be at least 6 characters.</span>
+          </div>
+          <button type="button" class="btn-primary" id="login-btn" onclick="handleLogin()">Sign In</button>
+          <p class="auth-note">No account? <span onclick="switchTab('register')">Register here</span></p>
+        </form>
+
+        <!-- Register Form -->
+        <form class="auth-form" id="register-form" novalidate>
+          <div class="field">
+            <label for="reg-name">Full Name</label>
+            <input type="text" id="reg-name" placeholder="Jane Doe"/>
+            <span class="err-msg" id="reg-name-err">Please enter your full name.</span>
+          </div>
+          <div class="field">
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" placeholder="you@example.com" autocomplete="email"/>
+            <span class="err-msg" id="reg-email-err">Please enter a valid email address.</span>
+          </div>
+          <div class="field">
+            <label for="reg-pass">Password</label>
+            <input type="password" id="reg-pass" placeholder="min. 6 characters" autocomplete="new-password"/>
+            <span class="err-msg" id="reg-pass-err">Password must be at least 6 characters.</span>
+          </div>
+          <button type="button" class="btn-primary" id="reg-btn" onclick="handleRegister()">Create Account</button>
+          <p class="auth-note">Already registered? <span onclick="switchTab('login')">Sign in</span></p>
+        </form>
+
+      </div>
+
+      <!-- Contact Section (shown after auth) -->
+      <div id="contact-section">
+
+        <!-- User badge -->
+        <div class="user-badge">
+          <div class="avatar" id="user-avatar">J</div>
+          <div class="user-info">
+            <div class="user-name" id="user-name-display">Jane Doe</div>
+            <div class="user-email-display" id="user-email-display">jane@example.com</div>
+          </div>
+          <button class="logout-btn" onclick="handleLogout()">Log out</button>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+
+        <!-- Contact Form -->
+        <form id="contact-form" novalidate>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div class="field">
+              <label for="cf-name">Your Name</label>
+              <input type="text" id="cf-name" placeholder="Jane Doe"/>
+              <span class="err-msg" id="cf-name-err">Name is required.</span>
+            </div>
+            <div class="field">
+              <label for="cf-email">Email Address</label>
+              <input type="email" id="cf-email" placeholder="you@example.com"/>
+              <span class="err-msg" id="cf-email-err">A valid email is required.</span>
+            </div>
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" placeholder="Tell us how we can help, or share your story…" maxlength="500"></textarea>
+              <div class="char-counter"><span id="char-count">0</span> / 500</div>
+              <span class="err-msg" id="cf-message-err">Please write a message (min. 10 characters).</span>
+            </div>
+            <button type="button" class="btn-primary" id="submit-btn" onclick="handleSubmit()">Send Message</button>
+          </div>
+        </form>
+
+        <!-- Success state -->
+        <div id="success-state">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="success-title">Form Submitted Successfully</div>
+          <div class="success-sub">Thank you for reaching out. Our team will respond within 48 hours.</div>
+          <div class="success-meta" id="success-ref">Ref # SCF-00001</div>
+          <button class="btn-reset" onclick="resetContactForm()">Send Another Message</button>
+        </div>
+
+      </div><!-- /contact-section -->
+
+    </div><!-- /card -->
+  </div><!-- /right-panel -->
+
+</div><!-- /page -->
+
+<!-- API Toast -->
+<div id="api-toast">✓ Message delivered via API</div>
+
+<script>
+  /* ─────────────────────────────────────────
+     Simulated in-memory user store
+  ───────────────────────────────────────── */
+  const DB = {};          // email → { name, password }
+  let currentUser = null; // { name, email }
+
+  /* ─────────────────────────────────────────
+     Simulated async API helper
+  ───────────────────────────────────────── */
+  function apiCall(endpoint, payload) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (endpoint === 'auth/login') {
+          const user = DB[payload.email];
+          if (!user) return reject({ message: 'No account found with this email.' });
+          if (user.password !== payload.password) return reject({ message: 'Incorrect password.' });
+          resolve({ token: btoa(payload.email + ':' + Date.now()), user: { name: user.name, email: payload.email } });
+        }
+        if (endpoint === 'auth/register') {
+          if (DB[payload.email]) return reject({ message: 'An account already exists for this email.' });
+          DB[payload.email] = { name: payload.name, password: payload.password };
+          resolve({ token: btoa(payload.email + ':' + Date.now()), user: { name: payload.name, email: payload.email } });
+        }
+        if (endpoint === 'contact/submit') {
+          const ref = 'SCF-' + String(Math.floor(10000 + Math.random() * 90000));
+          resolve({ success: true, ref });
+        }
+      }, 900 + Math.random() * 400);
+    });
+  }
+
+  /* ─────────────────────────────────────────
+     Tab switching
+  ───────────────────────────────────────── */
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach((b,i) => {
+      b.classList.toggle('active', (tab==='login' && i===0) || (tab==='register' && i===1));
+    });
+    document.getElementById('login-form').classList.toggle('visible', tab==='login');
+    document.getElementById('register-form').classList.toggle('visible', tab==='register');
+    clearErrors();
+  }
+
+  /* ─────────────────────────────────────────
+     Validation helpers
+  ───────────────────────────────────────── */
+  function setErr(field, errId, msg, show) {
+    field.classList.toggle('error', show);
+    const el = document.getElementById(errId);
+    if (msg) el.textContent = msg;
+    el.classList.toggle('show', show);
+    return show;
+  }
+  function clearErrors() {
+    document.querySelectorAll('.error').forEach(e => e.classList.remove('error'));
+    document.querySelectorAll('.err-msg').forEach(e => e.classList.remove('show'));
+  }
+  function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  /* ─────────────────────────────────────────
+     Loading state on buttons
+  ───────────────────────────────────────── */
+  function setLoading(btn, loading, label) {
+    btn.disabled = loading;
+    btn.innerHTML = loading
+      ? `<span class="spinner"></span> ${label}`
+      : label;
+  }
+
+  /* ─────────────────────────────────────────
+     Toast
+  ───────────────────────────────────────── */
+  function showToast(msg) {
+    const t = document.getElementById('api-toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  /* ─────────────────────────────────────────
+     Auth: Login
+  ───────────────────────────────────────── */
+  async function handleLogin() {
+    clearErrors();
+    const emailEl = document.getElementById('login-email');
+    const passEl  = document.getElementById('login-pass');
+    const email   = emailEl.value.trim();
+    const pass    = passEl.value;
+    let valid = true;
+    if (!isEmail(email)) valid = setErr(emailEl,'login-email-err','Please enter a valid email address.',true) && false;
+    if (pass.length < 6)  valid = setErr(passEl,'login-pass-err','Password must be at least 6 characters.',true) && false;
+    if (!valid) return;
+
+    const btn = document.getElementById('login-btn');
+    setLoading(btn, true, 'Signing in…');
+    try {
+      const res = await apiCall('auth/login', { email, password: pass });
+      currentUser = res.user;
+      showAuthSuccess();
+      showToast('✓ Authenticated via API');
+    } catch(e) {
+      showToast('✗ ' + e.message);
+      setErr(emailEl, 'login-email-err', e.message, true);
+    } finally {
+      setLoading(btn, false, 'Sign In');
+    }
+  }
+
+  /* ─────────────────────────────────────────
+     Auth: Register
+  ───────────────────────────────────────── */
+  async function handleRegister() {
+    clearErrors();
+    const nameEl  = document.getElementById('reg-name');
+    const emailEl = document.getElementById('reg-email');
+    const passEl  = document.getElementById('reg-pass');
+    const name    = nameEl.value.trim();
+    const email   = emailEl.value.trim();
+    const pass    = passEl.value;
+    let valid = true;
+    if (!name)           valid = setErr(nameEl,'reg-name-err','Please enter your full name.',true) && false;
+    if (!isEmail(email)) valid = setErr(emailEl,'reg-email-err','Please enter a valid email address.',true) && false;
+    if (pass.length < 6) valid = setErr(passEl,'reg-pass-err','Password must be at least 6 characters.',true) && false;
+    if (!valid) return;
+
+    const btn = document.getElementById('reg-btn');
+    setLoading(btn, true, 'Creating account…');
+    try {
+      const res = await apiCall('auth/register', { name, email, password: pass });
+      currentUser = res.user;
+      showAuthSuccess();
+      showToast('✓ Account created via API');
+    } catch(e) {
+      showToast('✗ ' + e.message);
+      setErr(emailEl, 'reg-email-err', e.message, true);
+    } finally {
+      setLoading(btn, false, 'Create Account');
+    }
+  }
+
+  /* ─────────────────────────────────────────
+     Show contact form after auth
+  ───────────────────────────────────────── */
+  function showAuthSuccess() {
+    document.getElementById('auth-tabs').style.display = 'none';
+    document.getElementById('auth-section').style.display = 'none';
+
+    const cs = document.getElementById('contact-section');
+    cs.classList.add('visible');
+
+    // Populate badge
+    const initials = currentUser.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+    document.getElementById('user-avatar').textContent = initials;
+    document.getElementById('user-name-display').textContent = currentUser.name;
+    document.getElementById('user-email-display').textContent = currentUser.email;
+
+    // Pre-fill name & email
+    document.getElementById('cf-name').value  = currentUser.name;
+    document.getElementById('cf-email').value = currentUser.email;
+    updateProgress();
+  }
+
+  /* ─────────────────────────────────────────
+     Logout
+  ───────────────────────────────────────── */
+  function handleLogout() {
+    currentUser = null;
+    document.getElementById('auth-tabs').style.display = 'flex';
+    document.getElementById('auth-section').style.display = 'block';
+    document.getElementById('contact-section').classList.remove('visible');
+    document.getElementById('success-state').classList.remove('visible');
+    document.getElementById('contact-form').style.display = 'block';
+    switchTab('login');
+    clearErrors();
+    showToast('You have been signed out.');
+  }
+
+  /* ─────────────────────────────────────────
+     Progress bar
+  ───────────────────────────────────────── */
+  function updateProgress() {
+    const name = document.getElementById('cf-name').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const msg  = document.getElementById('cf-message').value.trim();
+    let filled = 0;
+    if (name)  filled++;
+    if (isEmail(email)) filled++;
+    if (msg.length >= 10) filled++;
+    document.getElementById('progress-fill').style.width = Math.round((filled/3)*100) + '%';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    ['cf-name','cf-email','cf-message'].forEach(id => {
+      document.getElementById(id).addEventListener('input', updateProgress);
+    });
+    document.getElementById('cf-message').addEventListener('input', function() {
+      document.getElementById('char-count').textContent = this.value.length;
+    });
+  });
+
+  /* ─────────────────────────────────────────
+     Contact Form Submit
+  ───────────────────────────────────────── */
+  async function handleSubmit() {
+    clearErrors();
+    const nameEl  = document.getElementById('cf-name');
+    const emailEl = document.getElementById('cf-email');
+    const msgEl   = document.getElementById('cf-message');
+    const name    = nameEl.value.trim();
+    const email   = emailEl.value.trim();
+    const message = msgEl.value.trim();
+    let valid = true;
+    if (!name)             valid = setErr(nameEl,'cf-name-err','Name is required.',true) && false;
+    if (!isEmail(email))   valid = setErr(emailEl,'cf-email-err','A valid email is required.',true) && false;
+    if (message.length<10) valid = setErr(msgEl,'cf-message-err','Please write a message (min. 10 characters).',true) && false;
+    if (!valid) return;
+
+    const btn = document.getElementById('submit-btn');
+    setLoading(btn, true, 'Sending…');
+    try {
+      const res = await apiCall('contact/submit', { name, email, message });
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('success-ref').textContent = 'Ref # ' + res.ref;
+      document.getElementById('success-state').classList.add('visible');
+      showToast('✓ Submitted — ref ' + res.ref);
+    } catch(e) {
+      showToast('✗ Submission failed. Please try again.');
+    } finally {
+      setLoading(btn, false, 'Send Message');
+    }
+  }
+
+  /* ─────────────────────────────────────────
+     Reset contact form
+  ───────────────────────────────────────── */
+  function resetContactForm() {
+    document.getElementById('contact-form').reset();
+    document.getElementById('char-count').textContent = '0';
+    document.getElementById('success-state').classList.remove('visible');
+    document.getElementById('contact-form').style.display = 'block';
+    document.getElementById('cf-name').value  = currentUser.name;
+    document.getElementById('cf-email').value = currentUser.email;
+    document.getElementById('progress-fill').style.width = '66%';
+    clearErrors();
+  }
+</script>
+</body>
+</html>
